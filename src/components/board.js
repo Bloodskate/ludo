@@ -48,7 +48,7 @@ class Board extends Component {
         {
           this.state.squares.map(square => {
             return (
-              <div key={square.index}>{square.globalId}</div>
+              <div key={square.index}> Square no - {square.globalId}</div>
             )
           })
         }
