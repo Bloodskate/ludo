@@ -36,19 +36,21 @@ class Board extends Component {
         }
         squares[id] = square;
         id++;
+        rows[i][j] = square;
       }
     }
-
+    this.setState({rows});
     this.setState({squares});
   }
 
   render() {
+    console.log(this.state.rows)
     return (
       <div className="board">
         {
           this.state.squares.map(square => {
             return (
-              <div key={square.index}>{square.globalId}</div>
+              <div>Hi</div>
             )
           })
         }
