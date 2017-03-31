@@ -35,7 +35,6 @@ body {
   width: 35px;
   color: #333;
   background-color: white;
-  cursor: pointer;
 }
 
 .square:first-child {
@@ -56,4 +55,14 @@ body {
   border-radius: 17px;
   min-height: 27px;
   min-width: 27px;
+  cursor: pointer;
+}
+
+.safe {
+  color: black;
+  text-align: center;
+  line-height: 35px;
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: Arial;
 }

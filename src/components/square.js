@@ -81,14 +81,21 @@ class Square extends Component {
   }
 
   render() {
+    const starting_states = [init.red_start_square, init.blue_start_square, init.green_start_square, init.yellow_start_square];
+    let { globalId } = this.props.square;
     return (
       <div 
-        id={this.props.square.globalId}
+        id={globalId}
         className={this.genClass()} 
         style={{backgroundColor: this.squareColor(), borderColor: this.borderColor()}}>
+        <div>
+          <div className="safe">
+            { starting_states.includes(globalId) || init.safe_states.includes(globalId) ? "☆" : ""}
+          </div>
         {
           this.props.token === "yes" ? <Token /> : "" 
         }
+        </div>
       </div>
     );
   }
