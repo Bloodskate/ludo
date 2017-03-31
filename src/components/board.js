@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import SquareRow from './square_row';
+import Token from './token';
+
 class Board extends Component {
   constructor(props) {
     super(props);
@@ -26,10 +29,9 @@ class Board extends Component {
 
     //instantiating rows and cols as 2d arrays
     const rows = columnNames.map(i => Array(15));
-    const cols = columnNames.map(i => Array(15));
     
     for(let id = 0, i = 0; i < 15; i++) {
-      for(let j = 0; j < 15; j++) {
+      for(let j = 0; j < 15; j++) { 
         let square = {
           index: id,
           globalId: columnNames[j] + this.pad(i)
@@ -44,15 +46,19 @@ class Board extends Component {
   }
 
   render() {
-    console.log(this.state.rows)
     return (
-      <div className="board">
-        {
-          this.state.squares.map(square => {
-            return (
-            )
-          })
-        }
+      <div className="main">
+        <div className="board">
+          {
+            this.state.rows.map((row, index) => {
+              return (
+                <SquareRow row={row} key={index} />
+              )
+            })
+          }
+          <Token />
+        </div>
+        <div className="sidebar"></div>
       </div>
     );
   }

@@ -1,3 +1,51 @@
 body {
   background-color: #eee;
 }
+
+.main {
+  display: flex;
+}
+
+.sidebar {
+      flex: 1 1 20%;
+}
+
+.square-row {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.board {
+  flex: 1 1 80%;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  border: 1px solid #333;
+  align-items: center;
+}
+
+.square {
+  flex: 1 1 0;
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid #333;
+  position: relative;
+  min-height: 35px;
+  max-width: 35px;
+  color: #333;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+.token {
+  position: absolute;
+  top: 224px;
+  left: 39px;
+  background-color: black;
+  border: 2px solid white;
+  border-radius: 17px;
+  min-height: 27px;
+  min-width: 27px;
+}
