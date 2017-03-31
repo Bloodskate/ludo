@@ -31,17 +31,46 @@ class Square extends Component {
     return "white";
   }
 
+  //Maybe utilizing state will make this code cleaner 
   borderColor() {
     let { globalId } = this.props.square;
     let borderColor = "black";
     if(init.blue_home_squares.includes(globalId)){
       borderColor = "blue";
+      if(globalId[0] === "j" && globalId[2] === "5") {
+        borderColor = "blue blue black black";
+      } else if (globalId[2] === "5") {
+        borderColor = "blue blue black blue";
+      } else if (globalId[0] === "j") {
+        borderColor = "blue blue blue black";
+      }
     } else if(init.red_home_squares.includes(globalId)){
       borderColor = "red";
+      if(globalId[0] === "f" && globalId[2] === "5") {
+        borderColor = "red black black red";
+      } else if (globalId[2] === "5") {
+        borderColor = "red red black red";
+      } else if (globalId[0] === "f") {
+        borderColor = "red black red red";
+      }
     } else if(init.green_home_squares.includes(globalId)){
       borderColor = "green";
+      if(globalId[0] === "f" && globalId[2] === "9") {
+        borderColor = "black black green green";
+      } else if (globalId[2] === "9") {
+        borderColor = "black green green green";
+      } else if (globalId[0] === "f") {
+        borderColor = "green black green green";
+      }
     } else if(init.yellow_home_squares.includes(globalId)){
       borderColor = "yellow";
+      if(globalId[0] === "j" && globalId[2] === "9") {
+        borderColor = "black yellow yellow black";
+      } else if (globalId[2] === "9") {
+        borderColor = "black yellow yellow yellow";
+      } else if (globalId[0] === "j") {
+        borderColor = "yellow yellow yellow black";
+      }
     }
     return borderColor;
   }

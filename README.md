@@ -1,5 +1,5 @@
 ## TODO
-- [ ] Make the board
+- [x] Make the board
 - [ ] Path System
 - [ ] Offline Play
 - [ ] Online Multiplayer

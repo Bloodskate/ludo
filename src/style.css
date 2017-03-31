@@ -17,11 +17,11 @@ body {
 }
 
 .board {
-  flex: 1 1 80%;
+  flex: 1 1;
   display: flex;
   flex-flow: column nowrap;
   position: relative;
-  border: 1px solid #333;
+  border: 5px solid #333;
   align-items: center;
 }
 
@@ -31,11 +31,19 @@ body {
   flex-flow: column nowrap;
   border: 1px solid #333;
   position: relative;
-  min-height: 35px;
-  max-width: 35px;
+  height: 35px;
+  width: 35px;
   color: #333;
   background-color: white;
   cursor: pointer;
+}
+
+.square:first-child {
+  border-left: none;
+}
+
+.square:last-child {
+  border-right: none;
 }
 
 
