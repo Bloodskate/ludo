@@ -31,53 +31,27 @@ class Square extends Component {
     return "white";
   }
 
+  unevenBorderColor(color, id) {
+    let borderTop = id.includes("9") ? "black" : color;
+    let borderBottom = id.includes("5") ? "black" : color;
+    let borderLeft = id.includes("j") ? "black" : color;
+    let borderRight = id.includes("f") ? "black" : color;
+
+    return `${borderTop} ${borderRight} ${borderBottom} ${borderLeft}`;
+  }
+
   //Maybe utilizing state will make this code cleaner 
   borderColor() {
     let { globalId } = this.props.square;
     let borderColor = "black";
-    if(init.blue_home_squares.includes(globalId)){
-      borderColor = "blue";
-      if(globalId[0] === "j" && globalId[2] === "5") {
-        borderColor = "blue blue black black";
-      } else if (globalId[2] === "5") {
-        borderColor = "blue blue black blue";
-      } else if (globalId[0] === "j") {
-        borderColor = "blue blue blue black";
-      }
-    } else if(init.red_home_squares.includes(globalId)){
-      borderColor = "red";
-      if(globalId[0] === "f" && globalId[2] === "5") {
-        borderColor = "red black black red";
-      } else if (globalId[2] === "5") {
-        borderColor = "red red black red";
-      } else if (globalId[0] === "f") {
-        borderColor = "red black red red";
-      }
-    } else if(init.green_home_squares.includes(globalId)){
-      borderColor = "green";
-      if(globalId[0] === "f" && globalId[2] === "9") {
-        borderColor = "black black green green";
-      } else if (globalId[2] === "9") {
-        borderColor = "black green green green";
-      } else if (globalId[0] === "f") {
-        borderColor = "green black green green";
-      }
-    } else if(init.yellow_home_squares.includes(globalId)){
-      borderColor = "yellow";
-      if(globalId[0] === "j" && globalId[2] === "9") {
-        borderColor = "black yellow yellow black";
-      } else if (globalId[2] === "9") {
-        borderColor = "black yellow yellow yellow";
-      } else if (globalId[0] === "j") {
-        borderColor = "yellow yellow yellow black";
-      }
-    }
-    return borderColor;
-  }
 
-  genClass() {
-    let style = "square " + this.props.square.globalId ;
-    return style;
+
+    borderColor = init.red_home_squares.includes(globalId) ? this.unevenBorderColor("red", globalId) : 
+                    init.blue_home_squares.includes(globalId) ? this.unevenBorderColor("blue", globalId) : 
+                      init.green_home_squares.includes(globalId) ? this.unevenBorderColor("green", globalId) : 
+                        init.yellow_home_squares.includes(globalId) ? this.unevenBorderColor("yellow", globalId) : "black";
+
+    return borderColor;
   }
 
   render() {
@@ -86,7 +60,7 @@ class Square extends Component {
     return (
       <div 
         id={globalId}
-        className={this.genClass()} 
+        className="square" 
         style={{backgroundColor: this.squareColor(), borderColor: this.borderColor()}}>
         <div>
           <div className="safe">

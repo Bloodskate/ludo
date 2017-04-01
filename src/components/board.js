@@ -10,7 +10,7 @@ class Board extends Component {
     this.state = {
       squares: [],
       tokens: [],
-      turn: 'G'
+      rows: []
     }
   }
 
