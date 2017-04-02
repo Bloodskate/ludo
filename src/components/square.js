@@ -13,22 +13,12 @@ class Square extends Component {
     let green = [...init.green_home_squares, ...init.green_path_squares, init.green_start_square];
     let yellow = [...init.yellow_home_squares, ...init.yellow_path_squares, init.yellow_start_square];
     let { globalId } = this.props.square;
-    if(red.includes(globalId)) {
-      return "red";
-    }
-    if(blue.includes(globalId)) {
-      return "blue";
-    }
-    if(green.includes(globalId)) {
-      return "green";
-    }
-    if(yellow.includes(globalId)) {
-      return "yellow";
-    }
-    if(init.dead_states.includes(globalId)) {
-      return "black";
-    }
-    return "white";
+
+    let color = red.includes(globalId) ? "red" :
+                  blue.includes(globalId) ? "blue" :
+                    green.includes(globalId) ? "green" :
+                      yellow.includes(globalId) ? "yellow" : "white";
+    return color;
   }
 
   unevenBorderColor(color, id) {
@@ -40,16 +30,13 @@ class Square extends Component {
     return `${borderTop} ${borderRight} ${borderBottom} ${borderLeft}`;
   }
 
-  //Maybe utilizing state will make this code cleaner 
   borderColor() {
     let { globalId } = this.props.square;
-    let borderColor = "black";
-
-
-    borderColor = init.red_home_squares.includes(globalId) ? this.unevenBorderColor("red", globalId) : 
-                    init.blue_home_squares.includes(globalId) ? this.unevenBorderColor("blue", globalId) : 
-                      init.green_home_squares.includes(globalId) ? this.unevenBorderColor("green", globalId) : 
-                        init.yellow_home_squares.includes(globalId) ? this.unevenBorderColor("yellow", globalId) : "black";
+    let borderColor = 
+      init.red_home_squares.includes(globalId) ? this.unevenBorderColor("red", globalId) : 
+        init.blue_home_squares.includes(globalId) ? this.unevenBorderColor("blue", globalId) : 
+          init.green_home_squares.includes(globalId) ? this.unevenBorderColor("green", globalId) : 
+            init.yellow_home_squares.includes(globalId) ? this.unevenBorderColor("yellow", globalId) : "black";
 
     return borderColor;
   }
