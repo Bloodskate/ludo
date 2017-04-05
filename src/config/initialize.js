@@ -52,5 +52,8 @@ export const init = {
   green_start_square: "g13",
   safe_states: [
     "g02", "m06", "c08", "i12" 
+  ],
+  end_states: [
+    "g07", "h06", "h08", "i07"
   ]
 }

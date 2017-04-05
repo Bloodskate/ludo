@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
-import Token from './token';
+// import Token from './token';
 import { init } from '../config/initialize';
 
 
@@ -51,11 +51,12 @@ class Square extends Component {
         style={{backgroundColor: this.squareColor(), borderColor: this.borderColor()}}>
         <div>
           <div className="safe">
-            { starting_states.includes(globalId) || init.safe_states.includes(globalId) ? "☆" : ""}
+            {
+              init.safe_states.includes(globalId) ? "☆" :
+                starting_states.includes(globalId) ? "S" :
+                  init.end_states.includes(globalId) ? "G" : ""
+            }
           </div>
-        {
-          this.props.token === "yes" ? <Token /> : "" 
-        }
         </div>
       </div>
     );
