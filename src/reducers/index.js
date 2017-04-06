@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-
-import SquaresReducer from './board_reducer';
+import TestReducer from './reducer_test';
+import InitReducer from './reducer_init';
 
 const rootReducer = combineReducers({
-  squares: SquaresReducer
+  test: TestReducer,
+  init: InitReducer
 });
 
 export default rootReducer;
