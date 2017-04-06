@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { initializedSquares, initializedRows } from '../../actions';
-import { colNames, home, end_path, start, safe_states, end_states, dead_states } from '../../constants';
+import { initializedSquares, initializedRows, initializedTokens } from '../../actions';
+import { colNames, home, end_path, start, safe_states, end_states, oob_states } from '../../constants';
 
 import SquareRow from '../square-row/square-row';
+import Token from '../tokem/token';
 
 import styles from './board.css';
 
@@ -12,6 +13,7 @@ class Board extends Component {
 
   componentWillMount() {
     this.initBoard();
+    this.initTokens();
   }
 
   pad(x) {
@@ -28,7 +30,7 @@ class Board extends Component {
                   blue.includes(name) ? 'blue' :
                     green.includes(name) ? 'green' :
                       yellow.includes(name) ? 'yellow' : 
-                        dead_states.includes(name) ? 'black' : 'white';
+                        oob_states.includes(name) ? 'black' : 'white';
     return color;
   }
 
@@ -91,11 +93,39 @@ class Board extends Component {
     //*************************** */
   }
 
+  initTokens() {
+    let colors = ['red', 'blue', 'green', 'yellow'];
+    let tokens = [];
+    for( let i = 0, count = 0; i < 4; i++){
+      for( let j = 0; j < 4; j++) {
+        let token = {
+          id: count,
+          player: colors[i],
+          name: colors[i] + this.pad(j),
+        }
+        tokens[count] = token;
+        count++;
+      }
+    }
+
+    this.props.initializedTokens(tokens);
+  }
+
   renderRows() {
     return (
       this.props.init.map((row, index) => {
         return (
           <SquareRow row={row} key={index} />
+        )
+      })
+    )
+  }
+
+  renderTokens() {
+    return (
+      this.props.tokens.map((token) => {
+        return (
+          <Token token={token} key={token.id} />
         )
       })
     )
@@ -110,12 +140,24 @@ class Board extends Component {
   }
 
   render() {
-    console.log(this.props.init)
+    console.log(this.props.tokens)
     return (
       <div className={styles.main}>
         <div className={styles.board}>
           {
-            this.props.init ? this.renderRows() : this.renderLoading()
+            !this.props.init || !this.props.tokens ? this.renderLoading() :
+            <div>
+              <div>
+                {
+                  this.renderRows()
+                }
+              </div>
+              <div>
+                {
+                  this.renderTokens()
+                }
+              </div>
+            </div>
           }
         </div>
         <div className={styles.sidebar}></div>
@@ -128,8 +170,9 @@ function mapStateToProps(state) {
 
   return {
     title: state.test.title,
-    init: state.init
+    init: state.init,
+    tokens: state.tokens
   }
 }
 
-export default connect(mapStateToProps, { initializedSquares, initializedRows })(Board);
+export default connect(mapStateToProps, { initializedSquares, initializedRows, initializedTokens })(Board);

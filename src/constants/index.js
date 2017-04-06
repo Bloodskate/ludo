@@ -92,6 +92,11 @@ export const end_states = [
   "g07", "h06", "h08", "i07"
 ];
 
-export const dead_states = [
+//out of bounds
+export const oob_states = [
   "g06", "g08", "i06", "i08", "h07"
+];
+
+export const token_dead_pos = [
+  'b01', 'e01', 'b04', 'e04', 'k01', 'n01', 'k04', 'n04', 'k10', 'n10', 'k13', 'n13', 'b10', 'e10', 'b13', 'e13' 
 ];
