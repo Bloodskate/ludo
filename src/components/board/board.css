@@ -1,0 +1,16 @@
+.main {
+  display: flex;
+}
+
+.board {
+  flex: 1 1;
+  display: flex;
+  flex-flow: column nowrap;
+  position: relative;
+  border: 5px solid #333;
+  align-items: center;
+}
+
+.sidebar {
+      flex: 1 1 20%;
+}

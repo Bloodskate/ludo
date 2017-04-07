@@ -1,0 +1,29 @@
+.square {
+  flex: 1 1 0;
+  display: flex;
+  flex-flow: column nowrap;
+  border: 1px solid #333;
+  position: relative;
+  height: 34px;
+  width: 34px;
+  color: #333;
+  background-color: white;
+}
+
+.square:first-child {
+  border-left: none;
+}
+
+.square:last-child {
+  border-right: none;
+}
+
+
+.content {
+  color: black;
+  text-align: center;
+  line-height: 35px;
+  font-size: 30px;
+  font-weight: bolder;
+  font-family: Arial;
+}
