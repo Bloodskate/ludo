@@ -1,11 +1,9 @@
 import { combineReducers } from 'redux';
-import TestReducer from './reducer_test';
-import InitReducer from './reducer_init';
+import BoardReducer from './reducer_board';
 import TokenReducer from './reducer_token'; 
 
 const rootReducer = combineReducers({
-  test: TestReducer,
-  init: InitReducer,
+  board: BoardReducer,
   tokens: TokenReducer
 });
 
