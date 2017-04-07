@@ -10,13 +10,7 @@
   background-color: white;
 }
 
-.square:first-child {
-  border-left: none;
-}
 
-.square:last-child {
-  border-right: none;
-}
 
 
 .content {

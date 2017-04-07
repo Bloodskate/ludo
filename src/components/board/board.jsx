@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { initializedSquares, initializedRows, initializedTokens } from '../../actions';
-import { colNames, home, end_path, start, safe_states, end_states, oob_states } from '../../constants';
+import { colNames, home, end_path, start, safe_states, end_states, oob_states, token_dead_pos } from '../../constants';
 
 import SquareRow from '../square-row/square-row';
-import Token from '../tokem/token';
+import Token from '../token/token';
 
 import styles from './board.css';
 
@@ -93,8 +93,20 @@ class Board extends Component {
     //*************************** */
   }
 
+  getTokenPos(name) {
+    let vert = name.slice(1,3);
+    let hori = name.slice(0,1);
+    let left = ((hori.charCodeAt() - 96) - 1) * 36;
+    let top = vert * 36;
+    return {
+      top,
+      left
+    }
+  }
+
+
   initTokens() {
-    let colors = ['red', 'blue', 'green', 'yellow'];
+    let colors = ['red', 'blue', 'yellow', 'green'];
     let tokens = [];
     for( let i = 0, count = 0; i < 4; i++){
       for( let j = 0; j < 4; j++) {
@@ -102,7 +114,13 @@ class Board extends Component {
           id: count,
           player: colors[i],
           name: colors[i] + this.pad(j),
+          square: token_dead_pos[count],
+          top: 0,
+          left: 0
         }
+        let { top , left } = this.getTokenPos(token.square);
+        token.top = top;
+        token.left = left;
         tokens[count] = token;
         count++;
       }

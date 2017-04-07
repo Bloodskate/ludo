@@ -1,0 +1,8 @@
+.token {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 17px;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+}

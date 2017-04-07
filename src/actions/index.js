@@ -2,6 +2,7 @@
 export const INITIALIZED_SQUARES = 'INITIALIZED_SQUARES'; 
 export const INITIALIZED_ROWS = 'INITIALIZED_ROWS'; 
 export const INITIALIZED_TOKENS = 'INITIALIZED_TOKENS';
+export const TOKEN_SET_POS = 'TOKEN_SET_POS';
 
 //Action Creators
 export function initializedSquares(squares) {
