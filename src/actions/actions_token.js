@@ -1,10 +1,17 @@
 import { pad } from './actions_board';
-import { token_dead_pos } from '../constants';
+import { token_dead_pos, path } from '../constants';
 
+export function move(token, number, color) {
+  // let pos = token.pos.split("").map((x, i) => {
+  //   return i === 2 ? (+x + 1).toString() : x
+  // }).join("");
+  let pos = path[color][path[color].indexOf(token.pos) !== -1 ? path[color].indexOf(token.pos) + number : 0];
+  return pos;
+}
 
-export function getTokenPos(name) {
-  let vert = name.slice(1,3);
-  let hori = name.slice(0,1);
+export function getTokenPos(pos) {
+  let vert = pos.slice(1,3);
+  let hori = pos.slice(0,1);
   let left = ((hori.charCodeAt() - 96) - 1) * 36;
   let top = vert * 36;
   return {
@@ -22,11 +29,11 @@ export default function initTokens() {
         id: count,
         player: colors[i],
         name: colors[i] + pad(j),
-        square: token_dead_pos[count],
+        pos: token_dead_pos[count],
         top: 0,
         left: 0
       }
-      let { top , left } = getTokenPos(token.square);
+      let { top , left } = getTokenPos(token.pos);
       token.top = top;
       token.left = left;
       tokens[count] = token;

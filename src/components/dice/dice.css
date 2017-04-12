@@ -1,0 +1,19 @@
+.box{
+  height: 200px;
+  width: 200px;
+  border: 2px black solid;
+  text-align: center;
+}
+
+.button {
+  text-align: center;
+  margin-top: 5px;
+  width: 200px; 
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 20px;
+}

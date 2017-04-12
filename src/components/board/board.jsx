@@ -5,6 +5,7 @@ import { startBoard, startTokens } from '../../actions';
 
 import SquareRow from '../square-row/square-row';
 import Token from '../token/token';
+import Dice from '../dice/dice';
 
 import styles from './board.css';
 
@@ -64,7 +65,9 @@ class Board extends Component {
             </div>
           }
         </div>
-        <div className={styles.sidebar}></div>
+        <div className={styles.sidebar}>
+          <Dice />
+        </div>
       </div>
     );
   }
