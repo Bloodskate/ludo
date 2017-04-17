@@ -1,18 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { moveToken } from '../../actions';
+import { execTurn } from '../../actions';
 import styles from './token.css';
 
 class Token extends Component {
 
+  getStyles() {
+    let { token, turn } = this.props;    
+    return {
+      backgroundColor: token.player,
+      top: token.top+1,
+      left: token.left+1,
+      zIndex:  turn.player === token.player ? '1' : 0,
+      transform: turn.progress && turn.player === token.player ? 'scale(1.1, 1.1)' : 'none'
+    }
+  }
+
   render() {
-    let { token } = this.props;
+    let { token, turn } = this.props;
     return (
       <div
-        style={{backgroundColor: token.player, top: token.top+1 , left: token.left+1 }} 
+        style={this.getStyles()} 
         className={styles.token}
-        onClick={() => this.props.moveToken(token)}  
+        onClick={() => this.props.execTurn(token, turn)}  
       > 
 
       </div>
@@ -22,8 +33,8 @@ class Token extends Component {
 
 function mapStateToProps(state) {
   return {
-    state
+    turn: state.turn
   }
 }
 
-export default connect(mapStateToProps, { moveToken })(Token);
+export default connect(mapStateToProps, { execTurn })(Token);

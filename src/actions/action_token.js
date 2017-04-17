@@ -1,4 +1,4 @@
-import { pad } from './actions_board';
+import { pad } from './action_board';
 import { token_dead_pos, path } from '../constants';
 
 export function move(token, number, color) {
@@ -31,7 +31,8 @@ export default function initTokens() {
         name: colors[i] + pad(j),
         pos: token_dead_pos[count],
         top: 0,
-        left: 0
+        left: 0,
+        active: false
       }
       let { top , left } = getTokenPos(token.pos);
       token.top = top;
