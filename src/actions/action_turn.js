@@ -4,6 +4,7 @@ export default function initTurn() {
     player: colors[0],
     value: 0,
     progress: false,
-    six_count: 0
+    six_count: 0,
+    prev_value: 0
   }
 }
