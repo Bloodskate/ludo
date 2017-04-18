@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { startBoard, startTokens, startTurn } from '../../actions';
+import { initGame } from '../../actions';
 
 import SquareRow from '../square-row/square-row';
 import Token from '../token/token';
@@ -12,9 +12,7 @@ import styles from './board.css';
 class Board extends Component {
 
   componentWillMount() {
-    this.props.startBoard();
-    this.props.startTokens();
-    this.props.startTurn();
+    this.props.initGame();
   }
 
   renderRows() {
@@ -28,6 +26,7 @@ class Board extends Component {
   }
 
   renderTokens() {
+    console.log(this.props.tokens);
     return (
       this.props.tokens.map((token) => {
         return (
@@ -81,4 +80,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { startBoard, startTokens, startTurn })(Board);
+export default connect(mapStateToProps, { initGame })(Board);

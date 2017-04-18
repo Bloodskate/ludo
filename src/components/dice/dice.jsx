@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { changeValue } from '../../actions';
+import { startTurn } from '../../actions';
 import styles from './dice.css';
 
 class Dice extends Component {
-  spin() {
-    let value = Math.ceil(Math.random() * 6);
-    this.props.changeValue(value);
-  }
+
   render() {
     return (
       <div className={styles.container}>
@@ -17,7 +14,7 @@ class Dice extends Component {
         </div>
         <button 
           className={`btn btn-primary ${styles.button}`}
-          onClick={() => this.spin()}
+          onClick={() => this.props.startTurn()}
         >
           Spin
         </button>
@@ -32,4 +29,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { changeValue })(Dice);
+export default connect(mapStateToProps, { startTurn })(Dice);

@@ -2,9 +2,6 @@ import { pad } from './action_board';
 import { token_dead_pos, path } from '../constants';
 
 export function move(token, number, color) {
-  // let pos = token.pos.split("").map((x, i) => {
-  //   return i === 2 ? (+x + 1).toString() : x
-  // }).join("");
   let pos = path[color][path[color].indexOf(token.pos) !== -1 ? path[color].indexOf(token.pos) + number : 0];
   return pos;
 }
@@ -32,7 +29,8 @@ export default function initTokens() {
         pos: token_dead_pos[count],
         top: 0,
         left: 0,
-        active: false
+        active: false,
+        valid: false
       }
       let { top , left } = getTokenPos(token.pos);
       token.top = top;

@@ -13,7 +13,7 @@ class Token extends Component {
       top: token.top+1,
       left: token.left+1,
       zIndex:  turn.player === token.player ? '1' : 0,
-      transform: turn.progress && turn.player === token.player ? 'scale(1.1, 1.1)' : 'none'
+      transform: token.valid && turn.progress && turn.player === token.player ? 'scale(1.1, 1.1)' : 'none'
     }
   }
 
