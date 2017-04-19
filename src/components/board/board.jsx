@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { startBoard, startTokens } from '../../actions';
+import { initGame } from '../../actions';
 
 import SquareRow from '../square-row/square-row';
 import Token from '../token/token';
+import Dice from '../dice/dice';
 
 import styles from './board.css';
 
 class Board extends Component {
 
   componentWillMount() {
-    this.props.startBoard();
-    this.props.startTokens();
+    this.props.initGame();
   }
 
   renderRows() {
@@ -44,7 +44,6 @@ class Board extends Component {
   }
 
   render() {
-    console.log(this.props.tokens)
     return (
       <div className={styles.main}>
         <div className={styles.board}>
@@ -64,7 +63,9 @@ class Board extends Component {
             </div>
           }
         </div>
-        <div className={styles.sidebar}></div>
+        <div className={styles.sidebar}>
+          <Dice />
+        </div>
       </div>
     );
   }
@@ -78,4 +79,4 @@ function mapStateToProps(state) {
   }
 }
 
-export default connect(mapStateToProps, { startBoard, startTokens })(Board);
+export default connect(mapStateToProps, { initGame })(Board);

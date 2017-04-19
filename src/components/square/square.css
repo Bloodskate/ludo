@@ -4,14 +4,11 @@
   flex-flow: column nowrap;
   border: 1px solid #333;
   position: relative;
-  height: 34px;
-  width: 34px;
+  height: 36px;
+  width: 36px;
   color: #333;
   background-color: white;
 }
-
-
-
 
 .content {
   color: black;

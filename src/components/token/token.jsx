@@ -1,36 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import { execTurn, checkTokenExists } from '../../actions';
 import styles from './token.css';
 
 class Token extends Component {
 
-  getPos(){
-    return null;
-  }
-
   getStyles() {
-    let { token } = this.props;
-    let { top, left } = this.getPos() || {
-      top: 220,
-      left: 220
-    };
+    let { token, turn, valid_tokens } = this.props;    
     return {
       backgroundColor: token.player,
-      borderColor: 'black'
+      top: token.top+1,
+      left: token.left+1,
+      zIndex:  turn.player === token.player ? '1' : 0,
+      transform: checkTokenExists(valid_tokens, token) ? 'scale(1.1, 1.1)' : 'none'
     }
   }
-
-  componentDidMount() {
-    this.getStyles();
-  }
-
+  // && turn.progress && turn.player === token.player
   render() {
-    let { token } = this.props;
+    let { token, turn } = this.props;
     return (
       <div
-        style={{backgroundColor: token.player, top: token.top+1 , left: token.left+1 }} 
-        className={styles.token}> 
+        style={this.getStyles()} 
+        className={styles.token}
+        onClick={() => this.props.execTurn(token, turn)}  
+      > 
 
       </div>
     )
@@ -39,8 +33,9 @@ class Token extends Component {
 
 function mapStateToProps(state) {
   return {
-    state
+    turn: state.turn,
+    valid_tokens : state.valid_tokens
   }
 }
 
-export default connect(mapStateToProps)(Token);
+export default connect(mapStateToProps, { execTurn })(Token);

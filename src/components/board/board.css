@@ -3,7 +3,6 @@
 }
 
 .board {
-  flex: 1 1;
   display: flex;
   flex-flow: column nowrap;
   position: relative;
