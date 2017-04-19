@@ -26,7 +26,6 @@ class Board extends Component {
   }
 
   renderTokens() {
-    console.log(this.props.tokens);
     return (
       this.props.tokens.map((token) => {
         return (

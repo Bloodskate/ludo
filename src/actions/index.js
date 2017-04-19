@@ -50,12 +50,13 @@ function rollDice() {
 }
 
 function validTokens(turn, tokens) {
-  let valid_tokens = tokens.filter(t => t.player === turn.player );
+  let valid_tokens = tokens;
   if(turn.value !== 1) {
     valid_tokens = valid_tokens
                     .filter( t => t.active )
                     .filter( t => validMove(t, turn.value) );
   }
+  console.log(valid_tokens);
   return valid_tokens;
 }
 
@@ -63,17 +64,26 @@ export function startTurn(getState) {
   return (dispatch, getState) => {
     dispatch(rollDice());
     let { turn, tokens } = getState();
+    let turn_tokens = tokens.filter(t => t.player === turn.player );
     dispatch({
-      type: TURN_START
+      type: TURN_START,
+      turn_tokens
     });
     // dispatch(validTokens(turn, tokens));
-    let valid_tokens = validTokens(turn, tokens);
+    let valid_tokens = validTokens(turn, turn_tokens);
     dispatch({
       type: VALID_TOKENS,
       valid_tokens
-    })
-    if(valid_tokens.length === 0) setTimeout(() => dispatch(nextTurn(turn)), 1000);
+    });
+    console.log(valid_tokens);
+    if(valid_tokens.length === 0) {
+      setTimeout(() => {
+        dispatch(nextTurn(turn))
+        dispatch({type: END_TURN})
+      }, 1000);
+    } 
   }
+
 }
 
 function activateToken(token) {
@@ -123,19 +133,32 @@ function nextTurn(turn) {
   }
 }
 
+export function checkTokenExists(array, value) {
+  let check = array.filter( a => {
+    if(a.id === value.id) {
+      return true;
+    }
+    return false;
+  });
+  if(check.length === 1) return true;
+  return false;
+}
+
 export function execTurn(token, turn) {
   return (dispatch, getState) => {
     let { valid_tokens } = getState();
-    if(valid_tokens.includes(token)) {
-      if(turn.value === 1 && !token.active) {
-        dispatch(activateToken(token));
+    if(turn.player === token.player && valid_tokens.length > 0){
+      if(checkTokenExists(valid_tokens,token)) {
+        if(turn.value === 1 && !token.active) {
+          dispatch(activateToken(token));
+        }
+        dispatch(moveToken(token, turn));
       }
-      dispatch(moveToken(token, turn));
+      dispatch(nextTurn(turn));
+      dispatch({
+        type: END_TURN
+      })
     }
-    dispatch(nextTurn(turn));
-    dispatch({
-      type: END_TURN
-    })
   }
 }
 

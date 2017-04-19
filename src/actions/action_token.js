@@ -9,7 +9,7 @@ export function move(token, number, color) {
 export function validMove(token, move) {
   let color = token.player;
   let i = path[color].indexOf(token.pos);
-  if ( path[color].includes(path[color][i + move]) ) {
+  if (path[color].includes(path[color][i + move])) {
     return true;
   }
   return false; 

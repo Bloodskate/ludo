@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { execTurn } from '../../actions';
+import { execTurn, checkTokenExists } from '../../actions';
 import styles from './token.css';
 
 class Token extends Component {
@@ -13,7 +13,7 @@ class Token extends Component {
       top: token.top+1,
       left: token.left+1,
       zIndex:  turn.player === token.player ? '1' : 0,
-      transform: valid_tokens.includes(token) ? 'scale(1.1, 1.1)' : 'none'
+      transform: checkTokenExists(valid_tokens, token) ? 'scale(1.1, 1.1)' : 'none'
     }
   }
   // && turn.progress && turn.player === token.player
