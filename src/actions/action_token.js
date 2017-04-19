@@ -6,6 +6,15 @@ export function move(token, number, color) {
   return pos;
 }
 
+export function validMove(token, move) {
+  let color = token.player;
+  let i = path[color].indexOf(token.pos);
+  if ( path[color].includes(path[color][i + move]) ) {
+    return true;
+  }
+  return false; 
+}
+
 export function getTokenPos(pos) {
   let vert = pos.slice(1,3);
   let hori = pos.slice(0,1);

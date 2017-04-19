@@ -1,9 +1,10 @@
-import { INITIALIZED_TOKENS, VALID_TOKENS, TOKEN_MOVED } from '../actions';
+import { INITIALIZED_TOKENS, TOKEN_MOVED, ACTIVATED_TOKEN } from '../actions';
 
 
 const token = (state, action) => {
   switch(action.type) {
     case TOKEN_MOVED:
+    case ACTIVATED_TOKEN:
       if( state.id !== action.token.id ) {
         return state;
       }
@@ -19,7 +20,8 @@ const tokens = (state = null, action) => {
     case INITIALIZED_TOKENS:
       return action.tokens;
     case TOKEN_MOVED:
-       return state.map(t => token(t, action));
+    case ACTIVATED_TOKEN:
+      return state.map(t => token(t, action));
     default:
       return state;
   }

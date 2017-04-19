@@ -9,7 +9,9 @@ class Dice extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <div className={styles.box}>
+        <div className={styles.box}
+          style={{borderColor: this.props.player}}
+        >
           {this.props.value}
         </div>
         <button 
@@ -25,7 +27,8 @@ class Dice extends Component {
 
 function mapStateToProps(state) {
   return {
-    value: state.turn.value
+    value: state.turn.value,
+    player: state.turn.player
   }
 }
 
