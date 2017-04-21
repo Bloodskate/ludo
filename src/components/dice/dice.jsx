@@ -15,6 +15,7 @@ class Dice extends Component {
           {this.props.value}
         </div>
         <button 
+          disabled={this.props.progress}
           className={`btn btn-primary ${styles.button}`}
           onClick={() => this.props.startTurn()}
         >
@@ -28,6 +29,7 @@ class Dice extends Component {
 function mapStateToProps(state) {
   return {
     value: state.turn.value,
+    progress: state.turn.progress,
     player: state.turn.player
   }
 }
