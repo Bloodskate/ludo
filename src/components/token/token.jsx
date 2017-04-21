@@ -18,7 +18,7 @@ class Token extends Component {
   }
   // && turn.progress && turn.player === token.player
   render() {
-    let { token, turn } = this.props;
+    let { token, turn, valid_tokens } = this.props;
     return (
       <div
         style={this.getStyles()} 

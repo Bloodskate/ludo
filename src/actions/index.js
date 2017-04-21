@@ -153,11 +153,11 @@ export function execTurn(token, turn) {
           dispatch(activateToken(token));
         }
         dispatch(moveToken(token, turn));
+        dispatch(nextTurn(turn));
+        dispatch({
+          type: END_TURN
+        })
       }
-      dispatch(nextTurn(turn));
-      dispatch({
-        type: END_TURN
-      })
     }
   }
 }
