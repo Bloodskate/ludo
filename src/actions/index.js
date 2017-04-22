@@ -1,4 +1,4 @@
-import initRows from './action_board';
+import initRows, {checkSafe} from './action_board';
 import initTokens, { move, getTokenPos, validMove } from './action_token';
 import initTurn from './action_turn';
 
@@ -14,6 +14,8 @@ export const NEXT_TURN = 'NEXT_TURN';
 export const TOKEN_MOVED = 'TOKEN_MOVED';
 export const ACTIVATED_TOKEN = 'ACTIVATED_TOKEN';
 export const END_TURN = 'END_TURN';
+export const SAFE_STATE = 'SAFE_STATE';
+export const KILLING_TOKENS  = 'KILLING_TOKENS';
 // export const TOKEN_SET_POS = 'TOKEN_SET_POS';
 // export const TOKEN_COMPLETE = 'TOKEN_COMPLETE';
 // export const CHANGE_TURN = 'CHANGE_TURN';
@@ -56,7 +58,6 @@ function validTokens(turn, tokens) {
                     .filter( t => t.active )
                     .filter( t => validMove(t, turn.value) );
   }
-  console.log(valid_tokens);
   return valid_tokens;
 }
 
@@ -75,7 +76,6 @@ export function startTurn(getState) {
       type: VALID_TOKENS,
       valid_tokens
     });
-    console.log(valid_tokens);
     if(valid_tokens.length === 0) {
       setTimeout(() => {
         dispatch(nextTurn(turn))
@@ -144,6 +144,42 @@ export function checkTokenExists(array, value) {
   return false;
 }
 
+function updateToken(token, getState) {
+  let { tokens } = getState();
+  let new_token = tokens.find(t => t.id === token.id);
+
+  return new_token;
+}
+
+function getSquareAtPos(pos, getState) {
+  let rows = getState().board;
+  let squares = [].concat(...rows);
+  let square = squares.find(s => s.name === pos);
+  return square;
+}
+
+function getTokensAtPos(pos, getState) {
+  let { tokens } = getState();
+  return tokens.filter(t => t.pos === pos); 
+}
+
+function killTokens(token, getState) {
+  let killer = updateToken(token, getState);
+  let scene_of_crime = getSquareAtPos(killer.pos, getState);
+  console.log(scene_of_crime);
+  if(scene_of_crime.content === "☆" || scene_of_crime.content === "S") {
+    return {
+      type: SAFE_STATE
+    }
+  }
+  let possible_victims = getTokensAtPos(scene_of_crime.name, getState);
+  let victims = possible_victims.filter(t => t.player !== killer.player);
+  return {
+    type: KILLING_TOKENS,
+    victims
+  }
+}
+
 export function execTurn(token, turn) {
   return (dispatch, getState) => {
     let { valid_tokens } = getState();
@@ -153,6 +189,7 @@ export function execTurn(token, turn) {
           dispatch(activateToken(token));
         }
         dispatch(moveToken(token, turn));
+        dispatch(killTokens(token, getState));
         dispatch(nextTurn(turn));
         dispatch({
           type: END_TURN

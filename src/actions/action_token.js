@@ -39,7 +39,8 @@ export default function initTokens() {
         top: 0,
         left: 0,
         active: false,
-        valid: false
+        valid: false,
+        zIndex: 0
       }
       let { top , left } = getTokenPos(token.pos);
       token.top = top;
