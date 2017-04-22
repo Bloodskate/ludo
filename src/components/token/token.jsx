@@ -12,7 +12,7 @@ class Token extends Component {
       backgroundColor: token.player,
       top: token.top+1,
       left: token.left+1,
-      zIndex:  token.zIndex,//turn.player === token.player ? '1' : 0,
+      zIndex:  token.zIndex + 4,//turn.player === token.player ? '1' : 0,
       transform: checkTokenExists(valid_tokens, token) ? 'scale(1.1, 1.1)' : 'none'
     }
   }
