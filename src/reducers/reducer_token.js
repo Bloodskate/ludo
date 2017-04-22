@@ -28,7 +28,8 @@ const token = (state, action) => {
       return Object.assign({}, state, {
         pos,
         top,
-        left
+        left,
+        active: false
       });
     default: 
       return state;
