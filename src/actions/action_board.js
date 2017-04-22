@@ -46,6 +46,11 @@ function content(name) {
   return content;
 }
 
+export function checkSafe(square) {
+  let check = [...safe_states, start.red, start.blue, start.green, start.yellow];
+  return check.includes(square.name);
+}
+
 export default function initRows() {
   let squares = [];
   let rows = colNames.map(i => Array(15));
