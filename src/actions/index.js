@@ -68,7 +68,8 @@ export function startTurn(getState) {
     let turn_tokens = tokens.filter(t => t.player === turn.player );
     dispatch({
       type: TURN_START,
-      turn_tokens
+      turn_tokens,
+      prev: turn.prev_value
     });
     // dispatch(validTokens(turn, tokens));
     let valid_tokens = validTokens(turn, turn_tokens);

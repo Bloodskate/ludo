@@ -13,7 +13,7 @@ const token = (state, action) => {
       }
       return Object.assign({}, state, action.token);
     case TURN_START:
-      if( !checkTokenExists(action.turn_tokens, state) ) {
+      if( !checkTokenExists(action.turn_tokens, state) && (action.prev === 1 || action.prev === 6)) {
         return state;
       }
       return Object.assign({}, state, {
